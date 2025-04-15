@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const VALID_SERVICES = ['template-service', 'ac-install', 'furnace-repair', 'hvac-maintenance'];
 
@@ -50,9 +51,13 @@ export default async function ServiceLocationPage({ params }: { params: Promise<
         <div className="mb-8 p-6 bg-white/10 backdrop-blur-sm rounded-lg shadow-lg">
           <p className="text-lg mb-4">Protech Heating & Cooling provides professional {serviceDisplay.toLowerCase()} services in {locationDisplay}.</p>
           <p className="mb-6">Our team of experienced technicians is ready to help with all your HVAC needs in the {locationDisplay} area.</p>
-          <div className="mt-8">
-            <Link href="/" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg shadow-lg transition inline-block mr-4">Back to Home</Link>
-            <Link href={`/${service}`} className="px-6 py-3 bg-transparent border border-sky-500 hover:bg-sky-500/10 text-sky-400 font-semibold rounded-lg shadow-lg transition inline-block">View All Locations</Link>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button asChild>
+              <Link href="/">Back to Home</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href={`/${service}`}>View All Locations</Link>
+            </Button>
           </div>
         </div>
       </div>

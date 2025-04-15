@@ -2,6 +2,7 @@ import React from 'react';
 import { getLocationData } from '@/lib/location/location-service';
 import { createLocationSlug } from '@/lib/utils';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Force dynamic rendering to ensure location data is fresh on each request
 export const dynamic = 'force-dynamic';
@@ -28,7 +29,9 @@ export default async function HomePage() {
           We offer <span className="font-semibold text-sky-400">Template Service</span> in <span className="font-semibold text-sky-400">{displayLocation}</span>
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href={`/template-service/${locationSlug}`} className="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg shadow-lg transition">Learn More</Link>
+          <Button asChild>
+            <Link href={`/template-service/${locationSlug}`}>Learn More</Link>
+          </Button>
         </div>
       </section>
     </div>

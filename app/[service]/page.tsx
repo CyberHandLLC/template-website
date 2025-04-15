@@ -1,21 +1,22 @@
 import { notFound } from 'next/navigation';
 import { getLocationData } from '@/lib/location/location-service';
 import { createLocationSlug, formatServiceName } from '@/lib/utils';
-
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 const VALID_SERVICES = ['template-service', 'ac-install', 'furnace-repair', 'hvac-maintenance'];
 
 export default async function ServicePage({ params }: { params: Promise<{ service: string }> }) {
   const { service } = await params;
-  
+
   if (!VALID_SERVICES.includes(service)) {
     notFound();
   }
-  
+
   const { city, region, country } = await getLocationData();
   const displayLocation = city && region ? `${city}, ${region}` : (city || region || country || 'your area');
   const locationSlug = createLocationSlug(city, region, displayLocation.toLowerCase().replace(/\s+/g, '-'));
   const serviceDisplay = formatServiceName(service);
-  
+
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
@@ -24,12 +25,15 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
           <p className="text-lg mb-4">We offer {serviceDisplay} in {displayLocation}.</p>
           <p className="mb-4">Click below to see specific information for your location.</p>
           <div className="mt-6">
-            <a 
-              href={`/${service}/${locationSlug}`}
-              className="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg shadow-lg transition inline-block"
+            <Button
+              asChild
+              variant="default"
+              size="default"
             >
-              {serviceDisplay} in {displayLocation}
-            </a>
+              <Link href={`/${service}/${locationSlug}`}>
+                {serviceDisplay} in {displayLocation}
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
