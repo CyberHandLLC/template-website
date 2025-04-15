@@ -1,6 +1,11 @@
 import React from 'react';
 import { getLocationData } from '@/lib/location/location-service';
 import Link from 'next/link';
+import { headers } from 'next/headers';
+
+// This forces Next.js to render this page dynamically on each request
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function HomePage() {
   console.log('HomePage: Fetching location data...');
