@@ -1,26 +1,15 @@
 import { notFound } from 'next/navigation';
 import { getLocationData } from '@/lib/location/location-service';
+import { createLocationSlug, formatServiceName } from '@/lib/utils';
 
 const VALID_SERVICES = ['template-service', 'ac-install', 'furnace-repair', 'hvac-maintenance'];
 
-// Format service name from slug (e.g., 'ac-install' -> 'Ac Install')
-function formatServiceName(slug: string): string {
-  return slug.split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
+type ServicePageParams = {
+  service: string;
+};
 
-// Generate location URL slug with city-state format
-function createLocationSlug(city?: string, region?: string, fallback = 'your-area'): string {
-  if (city && region) {
-    const citySlug = city.toLowerCase().replace(/[\s]+/g, '-');
-    return `${citySlug}-${region.toLowerCase()}`;
-  }
-  return fallback;
-}
-
-export default async function ServicePage({ params }: { params: Promise<{ service: string }> }) {
-  const { service } = await params;
+export default async function ServicePage({ params }: { params: ServicePageParams }) {
+  const { service } = params;
   
   if (!VALID_SERVICES.includes(service)) {
     notFound();
@@ -28,7 +17,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
   
   const { city, region, country } = await getLocationData();
   const displayLocation = city && region ? `${city}, ${region}` : (city || region || country || 'your area');
-  const locationSlug = createLocationSlug(city, region, displayLocation.toLowerCase().replace(/\\s+/g, '-'));
+  const locationSlug = createLocationSlug(city, region, displayLocation.toLowerCase().replace(/\s+/g, '-'));
   const serviceDisplay = formatServiceName(service);
   
   return (
