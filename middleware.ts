@@ -22,5 +22,5 @@ export async function middleware(request: NextRequest) {
 
 // Define the paths this middleware should apply to
 export const config = {
-  matcher: ['/', '/services/:path*'],
+  matcher: ['/', '/:path*'],
 };
