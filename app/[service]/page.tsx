@@ -27,9 +27,19 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
   let locationSlug = '';
   if (city && region) {
     // City and state available: create "city-state" format (lewis-center-oh)
-    const citySlug = city.toLowerCase().replace(/\\s+/g, '-');
+    // Ensure all spaces are replaced with hyphens
+    const citySlug = city.toLowerCase().replace(/\\s+/g, '-').replace(/ /g, '-');
     const regionSlug = region.toLowerCase();
     locationSlug = `${citySlug}-${regionSlug}`;
+    
+    // Double-check that there are no spaces left
+    console.log('Service page locationSlug:', locationSlug);
+    
+    // Safety check - ensure no spaces remain in the slug
+    if (locationSlug.includes(' ')) {
+      console.error('Error: Space detected in locationSlug:', locationSlug);
+      locationSlug = locationSlug.replace(/ /g, '-');
+    }
   } else {
     // Fallback to just the display location
     locationSlug = displayLocation.toLowerCase().replace(/\\s+/g, '-');

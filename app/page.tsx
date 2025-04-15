@@ -26,9 +26,19 @@ export default async function HomePage() {
   let locationSlug = '';
   if (city && region) {
     // City and state available: create "city-state" format (lewis-center-oh)
+    // Ensure all spaces are replaced with hyphens
     const citySlug = city.toLowerCase().replace(/\s+/g, '-');
     const regionSlug = region.toLowerCase();
     locationSlug = `${citySlug}-${regionSlug}`;
+    
+    // Double-check that there are no spaces left (debugging)
+    console.log('Final locationSlug:', locationSlug);
+    
+    // Safety check - ensure no spaces remain in the slug
+    if (locationSlug.includes(' ')) {
+      console.error('Error: Space detected in locationSlug:', locationSlug);
+      locationSlug = locationSlug.replace(/ /g, '-');
+    }
   } else {
     // Fallback to just the display location
     locationSlug = displayLocation.toLowerCase().replace(/\s+/g, '-');
