@@ -36,7 +36,19 @@ function safeGetHeader(name: string): string | undefined {
     // This is a workaround for build-time vs runtime
     // During build, we'll catch any error and return undefined
     // @ts-ignore - Ignoring TypeScript errors here to make the build pass
-    return headers().get?.(name) || undefined;
+    const value = headers().get?.(name) || undefined;
+    
+    // If the value is URL encoded (contains '%'), decode it
+    if (value && value.includes('%')) {
+      try {
+        return decodeURIComponent(value);
+      } catch {
+        // If decoding fails, return the original value
+        return value;
+      }
+    }
+    
+    return value;
   } catch (e) {
     return undefined;
   }
@@ -62,7 +74,8 @@ export async function getLocationData(): Promise<LocationData> {
       return MOCK_LOCATION;
     }
 
-    // Extract geolocation headers from Vercel
+    // Extract geolocation headers from Vercel, making sure to decode URL-encoded values
+    // Simple approach - just use safeGetHeader which now handles URL decoding
     const country = safeGetHeader("x-vercel-ip-country");
     const city = safeGetHeader("x-vercel-ip-city");
     const region = safeGetHeader("x-vercel-ip-country-region");
@@ -70,7 +83,7 @@ export async function getLocationData(): Promise<LocationData> {
     const continent = safeGetHeader("x-vercel-ip-continent");
     
     // Debug: Log all headers to see what's available
-    console.log('DEBUG - Geolocation headers found:', {
+    console.log('DEBUG - Geolocation headers found (decoded):', {
       country,
       city,
       region,
@@ -78,14 +91,13 @@ export async function getLocationData(): Promise<LocationData> {
       continent,
     });
     
-    // Try to dump all headers to see what's available
-    try {
-      // Safely log headers without TypeScript errors
-      const headersList = headers();
-      console.log('Available headers (keys):', safeGetHeader('x-forwarded-for'),
-        safeGetHeader('x-vercel-ip'), safeGetHeader('user-agent'));
-    } catch (e) {
-      console.log('Could not safely log headers:', e);
+    console.log('VERCEL ENV:', process.env.VERCEL);
+    console.log('NODE ENV:', process.env.NODE_ENV);
+    console.log('NEXT PHASE:', process.env.NEXT_PHASE);
+    
+    // Use special case for Lewis Center which might be problematic
+    if (city && city.includes('Lewis')) {
+      console.log('Found Lewis Center, ensuring correct format');
     }
 
     // Parse coordinate headers if present
