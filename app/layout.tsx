@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locationData = await getLocationData();
-  
+
   return (
     <html lang="en">
       <body className="antialiased text-body bg-background text-slate-200">

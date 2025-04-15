@@ -1,19 +1,11 @@
 import React from 'react';
 import { getLocationData } from '@/lib/location/location-service';
+import { createLocationSlug } from '@/lib/utils';
 import Link from 'next/link';
 
 // Force dynamic rendering to ensure location data is fresh on each request
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
-
-// Generate location URL slug with city-state format
-function createLocationSlug(city?: string, region?: string, fallback = 'your-area'): string {
-  if (city && region) {
-    const citySlug = city.toLowerCase().replace(/[\s]+/g, '-');
-    return `${citySlug}-${region.toLowerCase()}`;
-  }
-  return fallback;
-}
 
 export default async function HomePage() {
   const { city, region, country } = await getLocationData();
