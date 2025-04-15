@@ -30,7 +30,10 @@ export default async function HomePage() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild>
-            <Link href={`/template-service/${locationSlug}`}>Learn More</Link>
+            <Link href={`/services/template-service/${locationSlug}`}>Learn More</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/services">View All Services</Link>
           </Button>
         </div>
       </section>
