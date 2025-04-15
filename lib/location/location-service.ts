@@ -33,11 +33,23 @@ const MOCK_LOCATION: LocationData = {
  */
 function safeGetHeader(name: string): string | undefined {
   try {
+    // In production, we want to look specifically for Vercel geolocation headers
     // This is a workaround for build-time vs runtime
-    // During build, we'll catch any error and return undefined
+    const headersList = headers();
+    // Log all headers in development to debug
+    if (process.env.NODE_ENV === 'development') {
+      // Can't use entries() method directly during build time
+      try {
+        // @ts-ignore - Need to ignore TypeScript during build
+        console.log('Available headers:', Object.fromEntries(headersList));
+      } catch (err) {
+        console.log('Could not log headers');
+      }
+    }
     // @ts-ignore - Ignoring TypeScript errors here to make the build pass
-    return headers().get?.(name) || undefined;
+    return headersList.get?.(name) || undefined;
   } catch (e) {
+    console.error(`Error getting header ${name}:`, e);
     return undefined;
   }
 }
