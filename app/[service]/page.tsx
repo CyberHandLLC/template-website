@@ -4,8 +4,9 @@ import { getLocationData } from '@/lib/location/location-service';
 // List of valid services
 const VALID_SERVICES = ['template-service', 'ac-install', 'furnace-repair', 'hvac-maintenance'];
 
-export default async function ServicePage({ params }: { params: { service: string } }) {
-  const { service } = params;
+export default async function ServicePage({ params }: { params: Promise<{ service: string }> }) {
+  // In Next.js 15, params is a Promise that needs to be awaited
+  const { service } = await params;
   
   // Check if service is valid
   if (!VALID_SERVICES.includes(service)) {

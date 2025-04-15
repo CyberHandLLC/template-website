@@ -20,12 +20,13 @@ function formatLocationName(locationSlug: string): string {
     .join(' ');
 }
 
-export default function ServiceLocationPage({ 
+export default async function ServiceLocationPage({ 
   params 
 }: { 
-  params: { service: string; location: string } 
+  params: Promise<{ service: string; location: string }> 
 }) {
-  const { service, location } = params;
+  // In Next.js 15, params is a Promise that needs to be awaited
+  const { service, location } = await params;
   
   // Check if service is valid
   if (!VALID_SERVICES.includes(service)) {
@@ -74,12 +75,13 @@ export default function ServiceLocationPage({
 }
 
 // Generate metadata for the page
-export function generateMetadata({ 
+export async function generateMetadata({ 
   params 
 }: { 
-  params: { service: string; location: string } 
+  params: Promise<{ service: string; location: string }> 
 }) {
-  const { service, location } = params;
+  // In Next.js 15, params is a Promise that needs to be awaited
+  const { service, location } = await params;
   const serviceDisplay = formatServiceName(service);
   const locationDisplay = formatLocationName(location);
   

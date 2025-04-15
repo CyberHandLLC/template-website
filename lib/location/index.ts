@@ -25,7 +25,6 @@ export {
 // Export location service functions
 export {
   getLocationData,
-  getLocationFromHeaders,
   getLiteLocationFromHeaders,
 } from "./location-service";
 
