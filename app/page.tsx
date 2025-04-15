@@ -3,10 +3,18 @@ import { getLocationData } from '@/lib/location/location-service';
 import Link from 'next/link';
 
 export default async function HomePage() {
+  console.log('HomePage: Fetching location data...');
   const locationData = await getLocationData();
+  console.log('HomePage: Location data received:', JSON.stringify(locationData));
+  
   const { city, region, country } = locationData;
+  console.log('HomePage: Extracted location parts:', { city, region, country });
+  
   const displayLocation = city || region || country || 'your area';
+  console.log('HomePage: Display location:', displayLocation);
+  
   const locationSlug = displayLocation.toLowerCase().replace(/\s+/g, '-');
+  console.log('HomePage: Location slug for link:', locationSlug);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 text-center">
