@@ -18,6 +18,8 @@ const MOCK_LOCATION: LocationData = {
   lastUpdated: Date.now(),
 };
 
+import siteConfig from '../../config/site.json';
+
 export async function getLocationData(): Promise<LocationData> {
   try {
     // Use mock data during build time
@@ -48,12 +50,43 @@ export async function getLocationData(): Promise<LocationData> {
     
     // Check if we have any location data
     const hasLocation = Boolean(country || city || region);
-    
+
+    // Prioritize service area matching
+    const serviceAreas = siteConfig.serviceAreas || [];
+    let matchedArea = null;
+    let matchedCity = undefined;
+    let matchedZip = undefined;
+    let matchedCounty = undefined;
+
+    // Try to match by city
+    if (city) {
+      for (const area of serviceAreas) {
+        if (area.cities && area.cities.map(c => c.toLowerCase()).includes(city.toLowerCase())) {
+          matchedArea = area;
+          matchedCity = city;
+          matchedCounty = area.county;
+          break;
+        }
+      }
+    }
+    // Try to match by zip
+    if (!matchedArea && headersList.get("x-vercel-ip-zip")) {
+      const zip = headersList.get("x-vercel-ip-zip");
+      for (const area of serviceAreas) {
+        if (area.zips && area.zips.includes(zip)) {
+          matchedArea = area;
+          matchedZip = zip;
+          matchedCounty = area.county;
+          break;
+        }
+      }
+    }
+
     // If no location data is found, return mock location
     if (!hasLocation) {
       return MOCK_LOCATION;
     }
-    
+
     // Handle URL-encoded city names
     let decodedCity = city;
     if (city && city.includes('%')) {
@@ -64,7 +97,25 @@ export async function getLocationData(): Promise<LocationData> {
         decodedCity = city;
       }
     }
-    
+
+    // If matched to a service area, prioritize its info
+    if (matchedArea) {
+      return {
+        country: country || "US",
+        city: matchedCity || decodedCity,
+        region: region,
+        timezone,
+        continent,
+        latitude,
+        longitude,
+        isDetected: true,
+        lastUpdated: Date.now(),
+        county: matchedCounty,
+        zip: matchedZip,
+        serviceAreaCounty: matchedCounty,
+      };
+    }
+
     return {
       country,
       city: decodedCity,

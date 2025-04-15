@@ -1,44 +1,84 @@
 {
   "serviceTypes": [
     {
-      "id": "ac-install",
-      "name": "AC Installation",
-      "description": "Professional air conditioning installation services for residential and commercial properties in your area. Our certified technicians ensure proper sizing, efficient installation, and optimal performance.",
-      "shortDescription": "Expert installation of energy-efficient air conditioning systems",
-      "slug": "ac-install",
-      "icon": "snowflake",
-      "metaTitle": "AC Installation Services | %location%",
-      "metaDescription": "Professional air conditioning installation in %location%. Energy-efficient systems installed by certified technicians."
+      "id": "residential-hvac",
+      "name": "Residential HVAC",
+      "description": "Installations, maintenance, repairs, and tune-ups for home heating and cooling systems. Expert service for furnaces, air conditioners, heat pumps, and mini splits.",
+      "shortDescription": "Complete home HVAC installs, repairs, and maintenance",
+      "slug": "residential-hvac",
+      "icon": "home",
+      "metaTitle": "Residential HVAC Services | %location%",
+      "metaDescription": "Professional residential HVAC installation, repair, and maintenance in %location%. Reliable, energy-efficient solutions for your home."
     },
     {
-      "id": "furnace-repair",
-      "name": "Furnace Repair",
-      "description": "Quick and reliable furnace repair services to restore heating to your home or business. We diagnose and fix issues with all furnace types and brands, with same-day service available in most areas.",
-      "shortDescription": "Fast, reliable repairs for all furnace makes and models",
-      "slug": "furnace-repair",
-      "icon": "flame",
-      "metaTitle": "Furnace Repair Services | %location%",
-      "metaDescription": "Emergency furnace repair in %location%. Quick service for all makes and models by expert technicians."
+      "id": "commercial-hvac",
+      "name": "Commercial HVAC",
+      "description": "Installations, maintenance, repairs, rooftop units, and data center cooling (CRAC/CRAH units) for businesses and commercial properties.",
+      "shortDescription": "Business HVAC, rooftop units, data center cooling",
+      "slug": "commercial-hvac",
+      "icon": "building",
+      "metaTitle": "Commercial HVAC Services | %location%",
+      "metaDescription": "Expert commercial HVAC services in %location%. Rooftop units, repairs, and data center cooling for businesses."
     },
     {
-      "id": "hvac-maintenance",
-      "name": "HVAC Maintenance",
-      "description": "Regular maintenance plans to keep your heating and cooling systems running efficiently year-round. Our comprehensive tune-ups prevent costly breakdowns and extend the life of your equipment.",
-      "shortDescription": "Preventative maintenance to maximize system efficiency and lifespan",
-      "slug": "hvac-maintenance",
-      "icon": "settings",
-      "metaTitle": "HVAC Maintenance Services | %location%",
-      "metaDescription": "Professional HVAC maintenance in %location%. Keep your systems running efficiently with our preventative maintenance plans."
+      "id": "emergency-hvac",
+      "name": "Emergency HVAC",
+      "description": "24/7 emergency repair for heating, cooling, and refrigeration breakdowns. Fast response for homes and businesses.",
+      "shortDescription": "24/7 emergency HVAC and refrigeration repairs",
+      "slug": "emergency-hvac",
+      "icon": "alert-triangle",
+      "metaTitle": "Emergency HVAC Services | %location%",
+      "metaDescription": "24/7 emergency HVAC repair in %location%. Fast response for heating and cooling breakdowns."
     },
     {
-      "id": "template-service",
-      "name": "Template Service",
-      "description": "This is a placeholder service that can be customized for any additional HVAC service. Add your specific service details and offerings here to provide customers with relevant information.",
-      "shortDescription": "Customizable template for additional HVAC services",
-      "slug": "template-service",
-      "icon": "file",
-      "metaTitle": "Template Service | %location%",
-      "metaDescription": "Professional template service in %location%. Customizable description for SEO purposes."
+      "id": "new-installations",
+      "name": "New Installations",
+      "description": "Free estimates and expert installation of air conditioners, furnaces, boilers, heat pumps, and mini splits.",
+      "shortDescription": "AC, furnace, boiler, and mini split installs",
+      "slug": "new-installations",
+      "icon": "plus-circle",
+      "metaTitle": "HVAC Installations | %location%",
+      "metaDescription": "Professional installation of AC, furnaces, boilers, heat pumps, and mini splits in %location%. Free estimates."
+    },
+    {
+      "id": "maintenance-plans",
+      "name": "Maintenance Plans",
+      "description": "Seasonal tune-ups and priority scheduling to keep your HVAC systems running efficiently. Flexible plans for all system types.",
+      "shortDescription": "Seasonal tune-ups and priority maintenance",
+      "slug": "maintenance-plans",
+      "icon": "calendar",
+      "metaTitle": "HVAC Maintenance Plans | %location%",
+      "metaDescription": "Affordable HVAC maintenance plans in %location%. Seasonal tune-ups and priority scheduling for all systems."
+    },
+    {
+      "id": "indoor-air-quality",
+      "name": "Indoor Air Quality",
+      "description": "Air purifiers, humidifiers, and dehumidifiers to improve home and business air quality.",
+      "shortDescription": "Air purifiers, humidifiers, dehumidifiers",
+      "slug": "indoor-air-quality",
+      "icon": "wind",
+      "metaTitle": "Indoor Air Quality Solutions | %location%",
+      "metaDescription": "Improve indoor air quality in %location% with air purifiers, humidifiers, and dehumidifiers."
+    },
+    {
+      "id": "refrigeration",
+      "name": "Commercial Refrigeration",
+      "description": "Commercial refrigeration systems for restaurants, stores, and businesses. Installation, repair, and maintenance.",
+      "shortDescription": "Install, repair, and maintain commercial refrigeration",
+      "slug": "refrigeration",
+      "icon": "fridge",
+      "metaTitle": "Commercial Refrigeration Services | %location%",
+      "metaDescription": "Commercial refrigeration installation and repair in %location%. Serving restaurants, stores, and businesses."
+    },
+    {
+      "id": "thermostat-upgrades",
+      "name": "Thermostat Upgrades",
+      "description": "Upgrade to smart thermostats and zoning systems for greater comfort and energy savings.",
+      "shortDescription": "Smart thermostats and zoning system upgrades",
+      "slug": "thermostat-upgrades",
+      "icon": "thermometer",
+      "metaTitle": "Thermostat Upgrades | %location%",
+      "metaDescription": "Upgrade to smart thermostats and zoning systems in %location%. Improve comfort and efficiency."
     }
   ],
   "sectionTitles": {

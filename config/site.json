@@ -13,6 +13,26 @@
       "zip": "44667"
     }
   },
+  "serviceAreas": [
+    { "county": "Summit", "cities": ["Akron", "Barberton", "Cuyahoga Falls", "Stow", "Tallmadge", "Hudson", "Norton"], "zips": ["44301", "44302", "44303", "44304", "44305", "44306", "44307", "44308", "44310", "44311", "44312", "44313", "44314", "44319", "44320", "44203", "44221", "44223", "44224", "44278", "44236"] },
+    { "county": "Medina", "cities": ["Medina", "Wadsworth", "Seville", "Brunswick", "Lodi", "Rittman"], "zips": ["44256", "44281", "44273", "44212", "44254", "44270"] },
+    { "county": "Wayne", "cities": ["Wooster", "Orrville", "Smithville", "Fredericksburg", "Doylestown"], "zips": ["44691", "44667", "44677", "44627", "44230"] },
+    { "county": "Cuyahoga", "cities": ["Cleveland", "Mayfield Heights", "Lakewood", "Parma", "Garfield Heights"], "zips": ["44101", "44102", "44103", "44104", "44105", "44106", "44107", "44108", "44109", "44110", "44111", "44112", "44113", "44114", "44124", "44129", "44130", "44134", "44125"] },
+    { "county": "Stark", "cities": ["Canton", "Massillon"], "zips": ["44702", "44703", "44704", "44705", "44706", "44707", "44708", "44709", "44710", "44714", "44718", "44646", "44647"] },
+    { "county": "Ashland", "cities": ["Ashland"], "zips": ["44805"] },
+    { "county": "Richland", "cities": ["Mansfield"], "zips": ["44901", "44902", "44903", "44904", "44905", "44906", "44907"] },
+    { "county": "Other", "cities": ["Kent", "Ravenna", "Elyria", "North Ridgeville", "Chardon"], "zips": ["44240", "44266", "44035", "44039", "44024"] }
+  ],
+  "pricing": {
+    "residentialServiceCall": "$125 (covers the first hour of diagnostics)",
+    "commercialServiceCall": "$175 (covers the first hour of diagnostics)",
+    "repairs": "Billed after diagnostic; quote provided before repair; varies by parts/labor",
+    "newInstallations": "Free estimates for new HVAC systems",
+    "maintenancePlans": "Seasonal tune-ups, priority scheduling; pricing varies by system/type",
+    "afterHours": "24/7 emergency support; service call fees apply",
+    "paymentMethods": "Major credit cards, checks, cash",
+    "warranties": "Manufacturer warranties on parts/systems; labor warranty varies by job"
+  },
   "social": {
     "facebook": "https://facebook.com/protechohio",
     "twitter": "https://twitter.com/protechohio",
