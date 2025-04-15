@@ -1,15 +1,12 @@
 import React from 'react';
-import { getLocationData } from '../lib/location/location-service';
+import { getLocationData } from '@/lib/location/location-service';
 import Link from 'next/link';
 
 export default async function HomePage() {
-  // Force fresh data retrieval with no caching
   const locationData = await getLocationData();
-  console.log('Homepage location data:', locationData);
-  
   const { city, region, country } = locationData;
   const displayLocation = city || region || country || 'your area';
-  const locationSlug = displayLocation.toLowerCase().replace(/\s+/g, '-').replace(/\./, '');
+  const locationSlug = displayLocation.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 text-center">
