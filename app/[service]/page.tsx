@@ -4,12 +4,8 @@ import { createLocationSlug, formatServiceName } from '@/lib/utils';
 
 const VALID_SERVICES = ['template-service', 'ac-install', 'furnace-repair', 'hvac-maintenance'];
 
-type ServicePageParams = {
-  service: string;
-};
-
-export default async function ServicePage({ params }: { params: ServicePageParams }) {
-  const { service } = params;
+export default async function ServicePage({ params }: { params: Promise<{ service: string }> }) {
+  const { service } = await params;
   
   if (!VALID_SERVICES.includes(service)) {
     notFound();
