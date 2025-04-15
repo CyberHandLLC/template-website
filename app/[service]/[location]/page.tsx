@@ -24,11 +24,32 @@ function formatLocationName(locationSlug: string): string {
     console.error('Error decoding location slug:', e);
   }
   
-  // Then format by splitting on hyphens and capitalizing each word
-  return locationSlug
-    .split('-')
+  // Split the slug into parts
+  const parts = locationSlug.split('-');
+  
+  // Check if the last part looks like a state code (2 letters)
+  // Example: "lewis-center-oh" -> ["lewis", "center", "oh"]
+  let cityParts = parts;
+  let statePart = null;
+  
+  if (parts.length > 1 && parts[parts.length - 1].length === 2) {
+    // It looks like a state code is present
+    statePart = parts[parts.length - 1].toUpperCase();
+    cityParts = parts.slice(0, parts.length - 1);
+  }
+  
+  // Format the city name (capitalize each word)
+  const cityFormatted = cityParts
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+  
+  // If we have a state code, format as "City, STATE"
+  if (statePart) {
+    return `${cityFormatted}, ${statePart}`;
+  }
+  
+  // Otherwise just return the formatted city name
+  return cityFormatted;
 }
 
 export default async function ServiceLocationPage({ 

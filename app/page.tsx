@@ -15,12 +15,24 @@ export default async function HomePage() {
   const { city, region, country } = locationData;
   console.log('HomePage: Extracted location parts:', { city, region, country });
   
-  const displayLocation = city || region || country || 'your area';
+  // For display in the UI: "Lewis Center" or "Lewis Center, OH"
+  let displayLocation = city || region || country || 'your area';
+  if (city && region) {
+    displayLocation = `${city}, ${region}`;
+  }
   console.log('HomePage: Display location:', displayLocation);
   
-  // Create a properly formatted URL slug by replacing spaces with hyphens
-  // This is more URL-friendly than spaces that get encoded as %20
-  const locationSlug = displayLocation.toLowerCase().replace(/\s+/g, '-');
+  // For the URL: "lewis-center-oh"
+  let locationSlug = '';
+  if (city && region) {
+    // City and state available: create "city-state" format (lewis-center-oh)
+    const citySlug = city.toLowerCase().replace(/\s+/g, '-');
+    const regionSlug = region.toLowerCase();
+    locationSlug = `${citySlug}-${regionSlug}`;
+  } else {
+    // Fallback to just the display location
+    locationSlug = displayLocation.toLowerCase().replace(/\s+/g, '-');
+  }
   console.log('HomePage: Location slug for link:', locationSlug);
 
   return (
