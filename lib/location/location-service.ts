@@ -33,23 +33,11 @@ const MOCK_LOCATION: LocationData = {
  */
 function safeGetHeader(name: string): string | undefined {
   try {
-    // In production, we want to look specifically for Vercel geolocation headers
     // This is a workaround for build-time vs runtime
-    const headersList = headers();
-    // Log all headers in development to debug
-    if (process.env.NODE_ENV === 'development') {
-      // Can't use entries() method directly during build time
-      try {
-        // @ts-ignore - Need to ignore TypeScript during build
-        console.log('Available headers:', Object.fromEntries(headersList));
-      } catch (err) {
-        console.log('Could not log headers');
-      }
-    }
+    // During build, we'll catch any error and return undefined
     // @ts-ignore - Ignoring TypeScript errors here to make the build pass
-    return headersList.get?.(name) || undefined;
+    return headers().get?.(name) || undefined;
   } catch (e) {
-    console.error(`Error getting header ${name}:`, e);
     return undefined;
   }
 }
@@ -81,16 +69,52 @@ export async function getLocationData(): Promise<LocationData> {
     const timezone = safeGetHeader("x-vercel-ip-timezone");
     const continent = safeGetHeader("x-vercel-ip-continent");
     
+    // Debug: Log all headers to see what's available
+    console.log('DEBUG - Geolocation headers found:', {
+      country,
+      city,
+      region,
+      timezone,
+      continent,
+    });
+    
+    // Try to dump all headers to see what's available
+    try {
+      // Safely log headers without TypeScript errors
+      const headersList = headers();
+      console.log('Available headers (keys):', safeGetHeader('x-forwarded-for'),
+        safeGetHeader('x-vercel-ip'), safeGetHeader('user-agent'));
+    } catch (e) {
+      console.log('Could not safely log headers:', e);
+    }
+
     // Parse coordinate headers if present
     const latitudeStr = safeGetHeader("x-vercel-ip-latitude");
     const longitudeStr = safeGetHeader("x-vercel-ip-longitude");
     const latitude = latitudeStr ? parseFloat(latitudeStr) : undefined;
     const longitude = longitudeStr ? parseFloat(longitudeStr) : undefined;
 
-    // If no headers were found, return mock data
+    // If no headers were found, log it but ONLY return mock data if we're in development
+    // This is crucial for production where headers should exist
     if (!country && !city && !region) {
-      console.log('No geolocation headers found, using mock data');
-      return MOCK_LOCATION;
+      console.log('No geolocation headers found!');
+      
+      // Only use mock data in dev or build, NEVER in production
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('Using mock location in development');
+        return MOCK_LOCATION;
+      } else {
+        console.log('In production without headers - using empty defaults');
+        // In production, don't silently fall back to mock data
+        // Return a minimalistic location with default values
+        return {
+          ...DEFAULT_LOCATION,
+          isDetected: false,
+          // Include a clear indicator this is a fallback
+          city: "Unknown Location",
+          lastUpdated: Date.now(),
+        };
+      }
     }
     
     const locationData = {
