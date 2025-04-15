@@ -1,15 +1,8 @@
-/**
- * Location Utilities for Cyber Hand
- *
- * Provides utility functions for location validation,
- * formatting, and slug generation for SEO-friendly URLs.
- */
 import { cache } from "react";
 
-// List of valid locations (can be extended or fetched from API)
 export const VALID_LOCATIONS = [
   "new-york",
-  "lewis-center", // Spaces converted to hyphens for URL compatibility
+  "lewis-center",
   "los-angeles",
   "chicago",
   "san-francisco",
@@ -18,11 +11,9 @@ export const VALID_LOCATIONS = [
   "austin",
   "boston",
   "denver",
-  "atlanta",
-  // Add other locations as needed
+  "atlanta"
 ];
 
-// Maps original city names to URL-friendly slugs
 export const CITY_NAME_MAP: Record<string, string> = {
   "New York": "new-york",
   "Lewis Center": "lewis-center",
@@ -34,33 +25,18 @@ export const CITY_NAME_MAP: Record<string, string> = {
   Austin: "austin",
   Boston: "boston",
   Denver: "denver",
-  Atlanta: "atlanta",
+  Atlanta: "atlanta"
 };
 
-/**
- * Validates if a location slug is potentially valid for our application
- * Uses React.cache() for deduplication of validation requests
- *
- * In this more permissive implementation, we consider a location valid if:
- * 1. It's in our predefined list (guaranteed valid)
- * 2. OR it meets basic format requirements for a location slug
- */
 export const validateLocation = cache(async (location: string): Promise<boolean> => {
   if (!location) return false;
 
-  // Normalize the input slug
   const normalizedSlug = location.toLowerCase();
 
-  // If it's in our predefined list, it's definitely valid
   if (VALID_LOCATIONS.includes(normalizedSlug)) {
     return true;
   }
 
-  // Otherwise, perform basic validation for a potential location slug:
-  // - Must be at least 3 characters
-  // - Must contain only alphanumeric characters and hyphens
-  // - Must not contain consecutive hyphens
-  // - Must start and end with an alphanumeric character
   return (
     normalizedSlug.length >= 3 &&
     /^[a-z0-9][a-z0-9-]*[a-z0-9]$/.test(normalizedSlug) &&

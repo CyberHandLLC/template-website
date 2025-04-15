@@ -1,13 +1,5 @@
-/**
- * Location Data Service
- *
- * Provides location-specific data for generating unique content for each city page.
- * This helps improve SEO by ensuring each location page has unique, relevant content.
- */
-
 import { cache } from "react";
 
-// Define GeoLocation interface to avoid import issues
 interface GeoLocation {
   city?: string;
   region?: string;
@@ -15,8 +7,6 @@ interface GeoLocation {
   latitude?: number;
   longitude?: number;
 }
-
-// Define interfaces for location-specific data
 export interface LocationContent {
   headline?: string;
   summary?: string;
