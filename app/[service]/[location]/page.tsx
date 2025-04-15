@@ -14,6 +14,17 @@ function formatServiceName(serviceSlug: string): string {
 
 // Generate location display name from slug
 function formatLocationName(locationSlug: string): string {
+  // First decode any URL-encoded characters (like %20 for space)
+  try {
+    if (locationSlug.includes('%')) {
+      locationSlug = decodeURIComponent(locationSlug);
+    }
+  } catch (e) {
+    // If decoding fails, continue with the original string
+    console.error('Error decoding location slug:', e);
+  }
+  
+  // Then format by splitting on hyphens and capitalizing each word
   return locationSlug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))

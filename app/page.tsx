@@ -18,6 +18,8 @@ export default async function HomePage() {
   const displayLocation = city || region || country || 'your area';
   console.log('HomePage: Display location:', displayLocation);
   
+  // Create a properly formatted URL slug by replacing spaces with hyphens
+  // This is more URL-friendly than spaces that get encoded as %20
   const locationSlug = displayLocation.toLowerCase().replace(/\s+/g, '-');
   console.log('HomePage: Location slug for link:', locationSlug);
 
