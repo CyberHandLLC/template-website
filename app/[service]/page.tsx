@@ -16,8 +16,24 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
   // Get user's location
   const locationData = await getLocationData();
   const { city, region, country } = locationData;
-  const displayLocation = city || region || country || 'your area';
-  const locationSlug = displayLocation.toLowerCase().replace(/\\s+/g, '-');
+  
+  // For display in the UI: "Lewis Center" or "Lewis Center, OH"
+  let displayLocation = city || region || country || 'your area';
+  if (city && region) {
+    displayLocation = `${city}, ${region}`;
+  }
+  
+  // For the URL: "lewis-center-oh"
+  let locationSlug = '';
+  if (city && region) {
+    // City and state available: create "city-state" format (lewis-center-oh)
+    const citySlug = city.toLowerCase().replace(/\\s+/g, '-');
+    const regionSlug = region.toLowerCase();
+    locationSlug = `${citySlug}-${regionSlug}`;
+  } else {
+    // Fallback to just the display location
+    locationSlug = displayLocation.toLowerCase().replace(/\\s+/g, '-');
+  }
   
   // Convert service slug to display name
   const serviceDisplay = service
