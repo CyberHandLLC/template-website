@@ -50,10 +50,15 @@ function safeGetHeader(name: string): string | undefined {
  */
 export async function getLocationData(): Promise<LocationData> {
   try {
-    // During build time or in environments without Vercel headers
-    // fall back to mock data
-    if (typeof window !== 'undefined' || 
-        process.env.NODE_ENV === 'production' && process.env.NEXT_PHASE === 'phase-production-build') {
+    // Only use mock data during build time, but not in production runtime
+    if (process.env.NEXT_PHASE === 'phase-production-build') {
+      console.log('Using mock location during build time');
+      return MOCK_LOCATION;
+    }
+    
+    // For client-side rendering, avoid trying to access server headers
+    if (typeof window !== 'undefined') {
+      console.log('Client-side rendering detected, using mock location');
       return MOCK_LOCATION;
     }
 
