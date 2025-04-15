@@ -3,49 +3,62 @@ export interface Service {
   name: string;
   description: string;
   shortDescription: string;
-  icon?: string;
-  imageUrl?: string;
+  slug: string;
+  icon?: string; // Used for icon representation
 }
 
-const SERVICES: Service[] = [
+export const services: Service[] = [
   {
     id: 'ac-install',
     name: 'AC Installation',
-    description: 'Professional air conditioning installation services for residential and commercial properties. Our expert technicians ensure your new system is properly sized and installed for maximum efficiency and comfort.',
-    shortDescription: 'Expert installation of air conditioning systems for optimal comfort and efficiency.',
-    icon: 'fan',
+    description: 'Professional air conditioning installation services for residential and commercial properties in your area. Our certified technicians ensure proper sizing, efficient installation, and optimal performance.',
+    shortDescription: 'Expert installation of energy-efficient air conditioning systems',
+    slug: 'ac-install',
+    icon: 'snowflake'
   },
   {
     id: 'furnace-repair',
     name: 'Furnace Repair',
-    description: 'Fast, reliable furnace repair services to keep your home warm and comfortable. Our team can diagnose and fix any heating issue, from minor repairs to major system failures.',
-    shortDescription: 'Quick and reliable heating system repairs to restore comfort to your home.',
-    icon: 'flame',
+    description: 'Quick and reliable furnace repair services to restore heating to your home or business. We diagnose and fix issues with all furnace types and brands, with same-day service available in most areas.',
+    shortDescription: 'Fast, reliable repairs for all furnace makes and models',
+    slug: 'furnace-repair',
+    icon: 'flame'
   },
   {
     id: 'hvac-maintenance',
     name: 'HVAC Maintenance',
-    description: 'Regular maintenance programs to keep your heating and cooling systems running efficiently year-round. Preventative maintenance helps avoid costly breakdowns and extends the life of your equipment.',
-    shortDescription: 'Preventative care programs to optimize performance and extend equipment life.',
-    icon: 'wrench',
+    description: 'Regular maintenance plans to keep your heating and cooling systems running efficiently year-round. Our comprehensive tune-ups prevent costly breakdowns and extend the life of your equipment.',
+    shortDescription: 'Preventative maintenance to maximize system efficiency and lifespan',
+    slug: 'hvac-maintenance',
+    icon: 'settings'
   },
   {
     id: 'template-service',
     name: 'Template Service',
-    description: 'This is a template service description that can be customized based on your specific offerings. Detailed information about the service would go here.',
-    shortDescription: 'Customizable template for showcasing additional services.',
-    icon: 'settings',
-  },
+    description: 'This is a placeholder service that can be customized for any additional HVAC service. Add your specific service details and offerings here to provide customers with relevant information.',
+    shortDescription: 'Customizable template for additional HVAC services',
+    slug: 'template-service',
+    icon: 'file'
+  }
 ];
 
-export function getAllServices(): Service[] {
-  return SERVICES;
+/**
+ * Get a service by its slug
+ */
+export function getServiceBySlug(slug: string): Service | undefined {
+  return services.find(service => service.slug === slug);
 }
 
-export function getServiceById(id: string): Service | undefined {
-  return SERVICES.find(service => service.id === id);
+/**
+ * Check if a service slug is valid
+ */
+export function isValidService(slug: string): boolean {
+  return services.some(service => service.slug === slug);
 }
 
-export function isValidService(id: string): boolean {
-  return SERVICES.some(service => service.id === id);
+/**
+ * Get all service slugs - useful for static path generation
+ */
+export function getAllServiceSlugs(): string[] {
+  return services.map(service => service.slug);
 }

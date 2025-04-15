@@ -1,0 +1,30 @@
+{
+  "name": "Protech Heating & Cooling",
+  "tagline": "Professional HVAC Services",
+  "description": "Professional heating, cooling, and air quality services for residential and commercial properties.",
+  "logo": "/images/logo.svg",
+  "contact": {
+    "phone": "330-555-1234",
+    "email": "info@protechheatingandcooling.net",
+    "address": {
+      "street": "123 Main Street",
+      "city": "Orrville",
+      "state": "OH",
+      "zip": "44667"
+    }
+  },
+  "social": {
+    "facebook": "https://facebook.com/protechohio",
+    "twitter": "https://twitter.com/protechohio",
+    "instagram": "https://instagram.com/protechohio"
+  },
+  "seo": {
+    "titleTemplate": "%s | Protech Heating & Cooling",
+    "defaultTitle": "Professional HVAC Services | Protech Heating & Cooling",
+    "defaultDescription": "Professional heating, cooling, and air quality services for residential and commercial properties. Serving your local area with expert HVAC solutions."
+  },
+  "domains": [
+    "protech-ohio.com",
+    "protechheatingandcooling.net"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "serviceTypes": [
+    {
+      "id": "ac-install",
+      "name": "AC Installation",
+      "description": "Professional air conditioning installation services for residential and commercial properties in your area. Our certified technicians ensure proper sizing, efficient installation, and optimal performance.",
+      "shortDescription": "Expert installation of energy-efficient air conditioning systems",
+      "slug": "ac-install",
+      "icon": "snowflake",
+      "metaTitle": "AC Installation Services | %location%",
+      "metaDescription": "Professional air conditioning installation in %location%. Energy-efficient systems installed by certified technicians."
+    },
+    {
+      "id": "furnace-repair",
+      "name": "Furnace Repair",
+      "description": "Quick and reliable furnace repair services to restore heating to your home or business. We diagnose and fix issues with all furnace types and brands, with same-day service available in most areas.",
+      "shortDescription": "Fast, reliable repairs for all furnace makes and models",
+      "slug": "furnace-repair",
+      "icon": "flame",
+      "metaTitle": "Furnace Repair Services | %location%",
+      "metaDescription": "Emergency furnace repair in %location%. Quick service for all makes and models by expert technicians."
+    },
+    {
+      "id": "hvac-maintenance",
+      "name": "HVAC Maintenance",
+      "description": "Regular maintenance plans to keep your heating and cooling systems running efficiently year-round. Our comprehensive tune-ups prevent costly breakdowns and extend the life of your equipment.",
+      "shortDescription": "Preventative maintenance to maximize system efficiency and lifespan",
+      "slug": "hvac-maintenance",
+      "icon": "settings",
+      "metaTitle": "HVAC Maintenance Services | %location%",
+      "metaDescription": "Professional HVAC maintenance in %location%. Keep your systems running efficiently with our preventative maintenance plans."
+    },
+    {
+      "id": "template-service",
+      "name": "Template Service",
+      "description": "This is a placeholder service that can be customized for any additional HVAC service. Add your specific service details and offerings here to provide customers with relevant information.",
+      "shortDescription": "Customizable template for additional HVAC services",
+      "slug": "template-service",
+      "icon": "file",
+      "metaTitle": "Template Service | %location%",
+      "metaDescription": "Professional template service in %location%. Customizable description for SEO purposes."
+    }
+  ],
+  "sectionTitles": {
+    "servicesPage": "Our Services",
+    "serviceDetails": "Service Details",
+    "locationService": "Local Service Information"
+  },
+  "callToActions": {
+    "viewService": "View Details",
+    "contactUs": "Contact Us",
+    "backToServices": "Back to Services",
+    "backToHome": "Back to Home",
+    "viewAllServices": "View All Services",
+    "learnMore": "Learn More"
+  }
+}
